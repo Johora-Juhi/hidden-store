@@ -42,9 +42,9 @@
     <div class="button text-center">
     <button><a href="" class="nav-link bg-info text-light p-2">Insert Products</a></button>
     <button><a href="" class="nav-link bg-info text-light p-2">View Products</a></button>
-    <button><a href="" class="nav-link bg-info text-light p-2">Insert Categories</a></button>
+    <button><a href="index.php?insert_categories" class="nav-link bg-info text-light p-2">Insert Categories</a></button>
     <button><a href="" class="nav-link bg-info text-light p-2">View Categories</a></button>
-    <button><a href="" class="nav-link bg-info text-light p-2">Insert Brands</a></button>
+    <button><a href="index.php?insert_brands" class="nav-link bg-info text-light p-2">Insert Brands</a></button>
     <button><a href="" class="nav-link bg-info text-light p-2">View Brands</a></button>
     <button><a href="" class="nav-link bg-info text-light p-2">All Orders </a></button>
     <button><a href="" class="nav-link bg-info text-light p-2">All Payments</a></button>
@@ -54,8 +54,17 @@
 </div>
 </div>
 
-
-
+<!-- fourth child  -->
+<div class="container my-5">
+  <?php
+  if(isset($_GET['insert_categories'])){
+    include('insert_categories.php');
+  }
+  if(isset($_GET['insert_brands'])){
+    include('insert_brands.php');
+  }
+  ?>
+</div>
     <!-- last-child  -->
     <div class="container-fluid p-3 text-center bg-info footer">
       <p>All rights reserved @- juu-2023</p>
