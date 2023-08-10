@@ -35,16 +35,50 @@
             </div>
             <!-- category  -->
             <div class="form-outline mb-4 w-50 mx-auto">
-                <select name="product_cateory" id="" class="form-select">
+                <select name="product_category" id="" class="form-select">
                     <option value="">Select a Category</option>
+                    <?php
+                    ?>
+                    <option value=""></option>
                 </select>
+            </div>
+            <!-- brand  -->
+            <div class="form-outline mb-4 w-50 mx-auto">
+                <select name="product_brand" id="" class="form-select">
+                    <option value="">Select a Brand</option>
+                    <option value=""></option>
+                </select>
+            </div>
+             <!-- image1  -->
+             <div class="form-outline mb-4 w-50 mx-auto">
+                <label for="product_image1" class="form-label">Product Image 1</label>
+                <input type="file" id="product_image1" name="product_image1" class="form-control" required>
+            </div>
+             <!-- image2  -->
+             <div class="form-outline mb-4 w-50 mx-auto">
+                <label for="product_image2" class="form-label">Product Image 2</label>
+                <input type="file" id="product_image2" name="product_image2" class="form-control" required>
+            </div>
+             <!-- image3  -->
+             <div class="form-outline mb-4 w-50 mx-auto">
+                <label for="product_image3" class="form-label">Product Image 3</label>
+                <input type="file" id="product_image3" name="product_image3" class="form-control" required>
+            </div>
+             <!-- price  -->
+             <div class="form-outline mb-4 w-50 mx-auto">
+                <label for="product_price" class="form-label">Product Price</label>
+                <input type="text" id="product_price" name="product_price" class="form-control" placeholder="Enter product price" autocomplete="off" required>
+            </div>
+             <!-- Submit  -->
+             <div class="form-outline mb-4 w-50 mx-auto">
+                <input type="submit" name="insert_product" class="btn btn-info rounded-0 px-3 mb-3" value="Insert Product" required>
             </div>
         </form>
     </div>
 
 
-  <!-- bootsrap js link  -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <!-- bootsrap js link  -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 </body>
 
 </html>
