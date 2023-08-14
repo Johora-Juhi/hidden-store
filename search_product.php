@@ -45,7 +45,7 @@ include('./functions/common_functions.php');
             </li>
 
           </ul>
-          <form class="d-flex" action="search_product.php" method="get" role="search">
+          <form class="d-flex" action="" method="get" role="search">
             <input class="form-control me-2 rounded-1" type="search" name="search_data" placeholder="Search" aria-label="Search">
             <input class="btn btn-outline-light" type="submit" name="search_data_product" value="Search" >
           </form>
@@ -75,7 +75,7 @@ include('./functions/common_functions.php');
       <!-- Products  -->
       <div class="row px-1">
         <?php
-        getAllProducts();
+        searchProducts();
         getProdctsByCategories();
         getProdctsByBrand();
         ?>
@@ -112,9 +112,9 @@ include('./functions/common_functions.php');
     </div>
   </div>
   <!-- last-child  -->
- <?php
- include('./shared/footer.php')
- ?>
+  <div class="container-fluid p-3 text-center bg-info">
+    <p>All rights reserved @- juu-2023</p>
+  </div>
   <!-- bootsrap js link  -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 </body>
