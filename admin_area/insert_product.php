@@ -1,6 +1,45 @@
 <!-- database connection -->
 <?php
 include('../includes/connect.php');
+
+if(isset($_POST['insert_product'])){
+
+    $product_title = $_POST['product_title'];
+    $product_description = $_POST['product_description'];
+    $product_keywords = $_POST['product_keywords'];
+    $product_category = $_POST['product_category'];
+    $product_brand = $_POST['product_brand'];
+    $product_price = $_POST['product_price'];
+    $status = 'true';
+
+// accessing image name 
+    $product_image1 = $_FILES['product_image1']['name'];
+    $product_image2 = $_FILES['product_image2']['name'];
+    $product_image3 = $_FILES['product_image3']['name'];
+    
+    // accessing image temp name 
+    $temp_image1 = $_FILES['product_image1']['tmp_name'];
+    $temp_image2 = $_FILES['product_image2']['tmp_name'];
+    $temp_image3 = $_FILES['product_image3']['tmp_name'];
+
+    // checking empty condition 
+    if($product_title=='' or $product_description=='' or $product_keywords =='' or $product_category =='' or $product_brand=='' or $product_price=='' or $product_image1=='' or $product_image2=='' or $product_image1==''){
+        echo "<script>alert('Please fill all avialble fields') </script>";
+        exit();
+    }else{
+        // storing images 
+        move_uploaded_file($temp_image1,"./product_images/$product_image1");
+        move_uploaded_file($temp_image2,"./product_images/$product_image2");
+        move_uploaded_file($temp_image3,"./product_images/$product_image3");
+
+        // insert query 
+        $insert_product = "insert into `products` (product_title,product_description,product_keywords,category_id,barnd_id,product_image1,product_image2,product_image3,product_price,date,status) values ('$product_title','$product_description','$product_keywords','$product_category','$product_brand','$product_image1','$product_image2','$product_image3','$product_price',NOW(),'$status')";
+        $result_product = mysqli_query($con,$insert_product);
+        if($result_product){
+            echo "<script>alert('Product added successfully') </script>";
+        }
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
