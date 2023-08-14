@@ -75,7 +75,7 @@ include('./functions/common_functions.php');
       <!-- Products  -->
       <div class="row px-1">
         <?php
-        getProducts();
+        getAllProducts();
         getProdctsByCategories();
         getProdctsByBrand();
         ?>
@@ -112,9 +112,9 @@ include('./functions/common_functions.php');
     </div>
   </div>
   <!-- last-child  -->
-  <div class="container-fluid p-3 text-center bg-info">
-    <p>All rights reserved @- juu-2023</p>
-  </div>
+ <?php
+ include('./shared/footer.php')
+ ?>
   <!-- bootsrap js link  -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 </body>
