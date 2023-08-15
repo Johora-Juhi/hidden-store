@@ -38,7 +38,7 @@ include('./functions/common_functions.php');
               <a class="nav-link" href="#">Register</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#"><i class="fa-solid fa-cart-shopping fa-bounce" style="color: #050505;"></i> <sup>1</sup></a>
+              <a class="nav-link" href="#"><i class="fa-solid fa-cart-shopping fa-bounce" style="color: #050505;"></i> <sup><?php cart_items(); ?></sup></a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Total Price: 500/-</a>
@@ -47,12 +47,18 @@ include('./functions/common_functions.php');
           </ul>
           <form class="d-flex" action="" method="get" role="search">
             <input class="form-control me-2 rounded-1" type="search" name="search_data" placeholder="Search" aria-label="Search">
-            <input class="btn btn-outline-light" type="submit" name="search_data_product" value="Search" >
+            <input class="btn btn-outline-light" type="submit" name="search_data_product" value="Search">
           </form>
         </div>
       </div>
     </nav>
   </div>
+
+  <!-- calling cart function  -->
+  <?php
+  addToCart();
+  ?>
+
   <!-- second child  -->
   <div class="navbar navbar-expand-lg bg-secondary">
     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -79,7 +85,7 @@ include('./functions/common_functions.php');
         getProdctsByCategories();
         getProdctsByBrand();
         ?>
-        
+
       </div>
     </div>
     <div class="col-md-2 bg-secondary p-0">
@@ -89,7 +95,7 @@ include('./functions/common_functions.php');
           <h3>Delivery Brands</h3>
         </li>
         <?php
-      getBrands();
+        getBrands();
         ?>
       </ul>
 

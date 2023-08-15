@@ -282,3 +282,25 @@ function addToCart()
     }
   }
 }
+
+// getting cart item number 
+function cart_items()
+{
+  global $con;
+  if (isset($_GET['add_to_cart'])) {
+    $get_ip_address = getIPAddress();
+
+    // checking if the product already exist on cart 
+    $select_query = "SELECT * FROM `cart_details` WHERE ip_address='$get_ip_address'";
+    $result_products = mysqli_query($con, $select_query);
+    $count_cart_items = mysqli_num_rows($result_products);
+  } else {
+    $get_ip_address = getIPAddress();
+
+    // checking if the product already exist on cart 
+    $select_query = "SELECT * FROM `cart_details` WHERE ip_address='$get_ip_address'";
+    $result_products = mysqli_query($con, $select_query);
+    $count_cart_items = mysqli_num_rows($result_products);
+  }
+  echo $count_cart_items;
+}
