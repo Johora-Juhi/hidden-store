@@ -33,7 +33,7 @@
     <div class="container-fluid bg-light text-center p-2">
       <h1>Manage Details</h1>
     </div>
-
+<!-- helu  -->
     <!-- third child  -->
     <div class="row">
       <div class="col-md-12 d-flex bg-secondary align-items-center">
