@@ -9,7 +9,7 @@ include('./functions/common_functions.php');
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>E-Commerce using PHP</title>
+  <title>E-Commerce- Cart Details</title>
   <!-- bootstrap link -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
   <!-- fontawosome link  -->
@@ -39,9 +39,6 @@ include('./functions/common_functions.php');
             </li>
             <li class="nav-item">
               <a class="nav-link" href="cart.php"><i class="fa-solid fa-cart-shopping fa-bounce" style="color: #050505;"></i> <sup><?php cart_items();?></sup></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Total Price: <?php totalCartPrice();?>/-</a>
             </li>
 
           </ul>
@@ -76,49 +73,41 @@ include('./functions/common_functions.php');
     <p>Communication is the heart o ecommere and community</p>
   </div>
   <!-- fourth-child  -->
-  <div class="row">
-    <div class="col-md-10">
-      <!-- Products  -->
-      <div class="row px-1">
-        <?php
-        getProducts();
-        getProdctsByCategories();
-        getProdctsByBrand();
-        // $ip = getIPAddress();
-        // echo 'User Real IP Address - ' . $ip;
-        ?>
+<div class="container">
+<table class="table table-bordered text-center">
+    <thead>
+        <tr>
+            <th>Product Title</th>
+            <th>Product Image</th>
+            <th>Quantity</th>
+            <th>Total Price</th>
+            <th>Remove</th>
+            <th>Operations</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Apple</td>
+            <td><img src="" alt=""></td>
+            <td><input type="text"></td>
+            <td>5</td>
+            <td><input type="checkbox"></td>
+            <td>
+                <p>Update</p>
+                <p>Remove</p>
+            </td>
+        </tr>
+    </tbody>
+  </table>
 
-      </div>
-    </div>
-    <div class="col-md-2 bg-secondary p-0">
-      <!-- brands  -->
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-center text-light ">
-        <li class="nav-item mb-2 bg-info">
-          <h3>Delivery Brands</h3>
-        </li>
-        <?php
-        getBrands();
-        ?>
-      </ul>
+  <!-- subtotal  -->
+<div class="d-flex gap-3 my-3">
+    <h4>Subtotal: <strong class="text-info">5000/-</strong></h4>
+    <a href="index.php"><button class="btn btn-info rounded-0">Continue Shopping</button></a>
+    <a href=""><button class="btn btn-secondary rounded-0">Checkout</button></a>
+</div>
+</div>
 
-      <!-- categories  -->
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-center text-light ">
-        <li class="nav-item mb-2 bg-info">
-          <h3>Categories</h3>
-        </li>
-        <?php
-        $select_categories = 'SELECT * FROM `categories`';
-        $result_categories = mysqli_query($con, $select_categories);
-        while ($row_data = mysqli_fetch_assoc($result_categories)) {
-          $category_title = $row_data['category_title'];
-          $category_id = $row_data['category_id'];
-          echo "<li class='nav-item mb-2'><a href='index.php?category=$category_id' class='nav-link'>$category_title</a></li>";
-        }
-        ?>
-      </ul>
-
-    </div>
-  </div>
   <!-- last-child  -->
  <?php
   include('./shared/footer.php')
