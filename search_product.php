@@ -41,7 +41,7 @@ include('./functions/common_functions.php');
               <a class="nav-link" href="#"><i class="fa-solid fa-cart-shopping fa-bounce" style="color: #050505;"></i> <sup><?php cart_items(); ?></sup></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Total Price: 500/-</a>
+              <a class="nav-link" href="#">Total Price: <?php totalCartPrice();?>/-</a>
             </li>
 
           </ul>
