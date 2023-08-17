@@ -38,7 +38,7 @@ include('./functions/common_functions.php');
               <a class="nav-link" href="#">Register</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="cart.php"><i class="fa-solid fa-cart-shopping fa-bounce" style="color: #050505;"></i> <sup><?php cart_items();?></sup></a>
+              <a class="nav-link" href="cart.php"><i class="fa-solid fa-cart-shopping fa-bounce" style="color: #050505;"></i> <sup><?php cart_items(); ?></sup></a>
             </li>
 
           </ul>
@@ -73,20 +73,21 @@ include('./functions/common_functions.php');
     <p>Communication is the heart o ecommere and community</p>
   </div>
   <!-- fourth-child  -->
-<div class="container">
-<table class="table table-bordered text-center">
-    <thead>
-        <tr>
+  <div class="container">
+    <form action="" method="post">
+      <table class="table table-bordered text-center">
+        <thead>
+          <tr>
             <th>Product Title</th>
             <th>Product Image</th>
             <th>Quantity</th>
             <th>Total Price</th>
             <th>Remove</th>
             <th class="col-span-2">Operations</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php
+          </tr>
+        </thead>
+        <tbody>
+          <?php
           global $con;
           $total_price = 0;
           $get_ip_address = getIPAddress();
@@ -94,50 +95,67 @@ include('./functions/common_functions.php');
           $result_cart = mysqli_query($con, $cart_query);
           while ($row_data = mysqli_fetch_array($result_cart)) {
             $product_id = $row_data['product_id'];
+            $product_quantity = $row_data['quantity'];
             $product_query = "SELECT * FROM `products` WHERE product_id=$product_id";
             $result_products = mysqli_query($con, $product_query);
-            while ($row_product_price = mysqli_fetch_array($result_products)) {
-              $product_price_array = array($row_product_price['product_price']);
-              $product_price_sum = array_sum($product_price_array);
-              $product_title= $row_product_price['product_title'];
-              $product_price= $row_product_price['product_price'];
-              $product_image1= $row_product_price['product_image1'];
-              // echo "$product_price_sum";
-         
-        ?>
-        <tr>
-            <td><?php echo $product_title?></td>
-            <td><img class="cart-image" src="./admin_area/product_images/<?php echo $product_image1?>" alt=""></td>
-            <td><input type="form input w-50"></td>
-            <td><?php echo $product_price?></td>
-            <td><input type="checkbox"></td>
-            <td>
-                <p class="btn btn-info">Update</p>
-                <p class="btn btn-info">Remove</p>
-            </td>
-        </tr>
-        <?php
-           }
-           $total_price += $product_price_sum;
-         }
-         ?>
-    </tbody>
-  </table>
+            // while ($row_product_price = mysqli_fetch_array($result_products)) {
+            //   $product_price_array = array($row_product_price['product_price']);
+            //   $product_price_sum = array_sum($product_price_array);
+            // $product_title= $row_product_price['product_title'];
+            // $product_price= $row_product_price['product_price'];
+            // $product_image1= $row_product_price['product_image1'];
+            $cart_product = mysqli_fetch_assoc($result_products);
 
-  <!-- subtotal  -->
-<div class="d-flex gap-3 my-3">
-    <h4>Subtotal: <strong class="text-info"><?php echo $total_price?>/-</strong></h4>
-    <a href="index.php"><button class="btn btn-info rounded-0">Continue Shopping</button></a>
-    <a href=""><button class="btn btn-secondary rounded-0">Checkout</button></a>
-</div>
-</div>
+            $product_title = $cart_product['product_title'];
+            $product_price = $cart_product['product_price'];
+            $product_image1 = $cart_product['product_image1'];
+            // echo "$product_price_sum";
+            $product_price_sum = $product_price * $product_quantity;
+
+          ?>
+            <tr>
+              <td><?php echo $product_title ?></td>
+              <td><img class="cart-image" src="./admin_area/product_images/<?php echo $product_image1 ?>" alt=""></td>
+              <td>
+                <input type="text" class="form-input w-50" name="quantity" placeholder="<?php echo $product_quantity ?>">
+                <?php
+                if (isset($_POST['update_quantity'])) {
+                  $quantity = $_POST['quantity'];
+                  $update_cart = "UPDATE `cart_details` SET quantity = $quantity WHERE ip_address='$get_ip_address' AND product_id= $product_id";
+                  $result = mysqli_query($con, $update_cart);
+                  echo "<script>window.open('cart.php','_self')</script>";
+                }
+                ?>
+              </td>
+              <td><?php echo $product_price_sum ?></td>
+              <td><input type="checkbox"></td>
+              <td>
+                <input type="submit" value="Update" name="update_quantity" class="btn btn-info">
+                <input type="submit" value="Remove" name="remove" class="btn btn-info">
+              </td>
+            </tr>
+          <?php
+            //  }
+            $total_price += $product_price_sum;
+          }
+          ?>
+        </tbody>
+      </table>
+    </form>
+    <!-- subtotal  -->
+    <div class="d-flex gap-3 my-3">
+      <h4>Subtotal: <strong class="text-info"><?php echo $total_price ?>/-</strong></h4>
+      <a href="index.php"><button class="btn btn-info rounded-0">Continue Shopping</button></a>
+      <a href=""><button class="btn btn-secondary rounded-0">Checkout</button></a>
+    </div>
+  </div>
 
   <!-- last-child  -->
- <?php
+  <?php
   include('./shared/footer.php')
   ?>
   <!-- bootsrap js link  -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></>
 </body>
 
 </html>
