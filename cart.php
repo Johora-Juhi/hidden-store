@@ -74,25 +74,28 @@ include('./functions/common_functions.php');
   </div>
   <!-- fourth-child  -->
   <div class="container">
-    <form action="" method="post">
-      <table class="table table-bordered text-center">
-        <thead>
-          <tr>
-            <th>Product Title</th>
-            <th>Product Image</th>
-            <th>Quantity</th>
-            <th>Total Price</th>
-            <th>Remove</th>
-            <th class="col-span-2">Operations</th>
-          </tr>
-        </thead>
-        <tbody>
-          <?php
-          global $con;
-          $total_price = 0;
-          $get_ip_address = getIPAddress();
-          $cart_query = "SELECT * FROM `cart_details` WHERE ip_address='$get_ip_address'";
-          $result_cart = mysqli_query($con, $cart_query);
+
+
+        <?php
+        global $con;
+        $total_price = 0;
+        $get_ip_address = getIPAddress();
+        $cart_query = "SELECT * FROM `cart_details` WHERE ip_address='$get_ip_address'";
+        $result_cart = mysqli_query($con, $cart_query);
+        $row_count = mysqli_num_rows($result_cart);
+        if ($row_count > 0) {
+          echo "    <form action='' method='post'>
+          <table class='table table-bordered text-center'><thead>
+<tr>
+  <th>Product Title</th>
+  <th>Product Image</th>
+  <th>Quantity</th>
+  <th>Total Price</th>
+  <th>Remove</th>
+  <th class='col-span-2'>Operations</th>
+</tr>
+</thead>
+<tbody>";
           while ($row_data = mysqli_fetch_array($result_cart)) {
             $product_id = $row_data['product_id'];
             $product_quantity = $row_data['quantity'];
@@ -112,7 +115,7 @@ include('./functions/common_functions.php');
             // echo "$product_price_sum";
             $product_price_sum = $product_price * $product_quantity;
 
-          ?>
+        ?>
             <tr>
               <td><?php echo $product_title ?></td>
               <td><img class="cart-image" src="./admin_area/product_images/<?php echo $product_image1 ?>" alt=""></td>
@@ -128,7 +131,7 @@ include('./functions/common_functions.php');
                 ?>
               </td>
               <td><?php echo $product_price_sum ?></td>
-              <td><input type="checkbox"></td>
+              <td><input type="checkbox" name="remove_item[]" value="<?php echo $product_id ?>"></td>
               <td>
                 <input type="submit" value="Update" name="update_quantity" class="btn btn-info">
                 <input type="submit" value="Remove" name="remove" class="btn btn-info">
@@ -139,9 +142,28 @@ include('./functions/common_functions.php');
             $total_price += $product_price_sum;
           }
           ?>
-        </tbody>
+          </tbody>
       </table>
     </form>
+    <!-- function for removing item from cart  -->
+    <?php
+          function remove_item()
+          {
+            global $con;
+            if (isset($_POST['remove'])) {
+              foreach ($_POST['remove_item'] as $remove_id) {
+                echo $remove_id;
+                $delete_query = "DELETE FROM `cart_details` where product_id=$remove_id";
+                $result_query = mysqli_query($con, $delete_query);
+                if ($result_query) {
+                  echo "<script>window.open('cart.php','_self')</script>";
+                }
+              }
+            }
+          }
+
+          echo $remove_item = remove_item();
+    ?>
     <!-- subtotal  -->
     <div class="d-flex gap-3 my-3">
       <h4>Subtotal: <strong class="text-info"><?php echo $total_price ?>/-</strong></h4>
@@ -149,13 +171,20 @@ include('./functions/common_functions.php');
       <a href=""><button class="btn btn-secondary rounded-0">Checkout</button></a>
     </div>
   </div>
-
-  <!-- last-child  -->
-  <?php
-  include('./shared/footer.php')
-  ?>
-  <!-- bootsrap js link  -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></>
+<?php
+        } else {
+          echo "<h2 class='text-center text-danger'>Cart is empty</h2>
+  <a href='index.php'><button class='btn btn-info rounded-0 my-3'>Continue Shopping</button></a>
+  
+  </div>";
+        }
+?>
+<!-- last-child  -->
+<?php
+include('./shared/footer.php')
+?>
+<!-- bootsrap js link  -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 </body>
 
 </html>
