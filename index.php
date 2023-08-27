@@ -9,7 +9,7 @@ include('./functions/common_functions.php');
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>E-COmmerse using PHP</title>
+  <title>E-Commerce using PHP</title>
   <!-- bootstrap link -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
   <!-- fontawosome link  -->
@@ -38,10 +38,10 @@ include('./functions/common_functions.php');
               <a class="nav-link" href="#">Register</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#"><i class="fa-solid fa-cart-shopping fa-bounce" style="color: #050505;"></i> <sup>1</sup></a>
+              <a class="nav-link" href="cart.php"><i class="fa-solid fa-cart-shopping fa-bounce" style="color: #050505;"></i> <sup><?php cart_items();?></sup></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Total Price: 500/-</a>
+              <a class="nav-link" href="#">Total Price: <?php totalCartPrice();?>/-</a>
             </li>
 
           </ul>
@@ -53,6 +53,12 @@ include('./functions/common_functions.php');
       </div>
     </nav>
   </div>
+
+  <!-- calling cart function  -->
+  <?php
+  addToCart();
+  ?>
+
   <!-- second child  -->
   <div class="navbar navbar-expand-lg bg-secondary">
     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -78,6 +84,8 @@ include('./functions/common_functions.php');
         getProducts();
         getProdctsByCategories();
         getProdctsByBrand();
+        // $ip = getIPAddress();
+        // echo 'User Real IP Address - ' . $ip;
         ?>
 
       </div>
@@ -112,9 +120,9 @@ include('./functions/common_functions.php');
     </div>
   </div>
   <!-- last-child  -->
-  <div class="container-fluid p-3 text-center bg-info">
-    <p>All rights reserved @- juu-2023</p>
-  </div>
+ <?php
+  include('./shared/footer.php')
+  ?>
   <!-- bootsrap js link  -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 </body>

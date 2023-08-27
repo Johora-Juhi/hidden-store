@@ -77,46 +77,17 @@ include('./functions/common_functions.php');
   </div>
   <!-- fourth-child  -->
   <div class="row">
-    <div class="col-md-10">
-      <!-- Products  -->
-      <div class="row px-1">
-
-        <?php
-        viewProductDetails();
-        getProdctsByCategories();
-        getProdctsByBrand();
-        ?>
-
-      </div>
-    </div>
-    <div class="col-md-2 bg-secondary p-0">
-      <!-- brands  -->
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-center text-light ">
-        <li class="nav-item mb-2 bg-info">
-          <h3>Delivery Brands</h3>
-        </li>
-        <?php
-        getBrands();
-        ?>
-      </ul>
-
-            <!-- categories  -->
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-center text-light ">
-                <li class="nav-item mb-2 bg-info">
-                    <h3>Categories</h3>
-                </li>
-                <?php
-                $select_categories = 'SELECT * FROM `categories`';
-                $result_categories = mysqli_query($con, $select_categories);
-                while ($row_data = mysqli_fetch_assoc($result_categories)) {
-                    $category_title = $row_data['category_title'];
-                    $category_id = $row_data['category_id'];
-                    echo "<li class='nav-item mb-2'><a href='index.php?category=$category_id' class='nav-link'>$category_title</a></li>";
-                }
-                ?>
-            </ul>
-
+    <div class="col-md-12">
+        <div class="row">
+            <?php
+            if(!isset($_SESSION['user_email'])){
+                include('./users_area/user_login.php');
+            }else{
+                include('./payment.php');
+            }
+            ?>
         </div>
+
     </div>
   </div>
   <!-- last-child  -->
