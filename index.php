@@ -47,7 +47,7 @@ include('./functions/common_functions.php');
           </ul>
           <form class="d-flex" action="search_product.php" method="get" role="search">
             <input class="form-control me-2 rounded-1" type="search" name="search_data" placeholder="Search" aria-label="Search">
-            <input class="btn btn-outline-light" type="submit" name="search_data_product" value="Search" >
+            <input class="btn btn-outline-light" type="submit" name="search_data_product" value="Search">
           </form>
         </div>
       </div>
@@ -79,7 +79,7 @@ include('./functions/common_functions.php');
         getProdctsByCategories();
         getProdctsByBrand();
         ?>
-        
+
       </div>
     </div>
     <div class="col-md-2 bg-secondary p-0">
@@ -89,7 +89,7 @@ include('./functions/common_functions.php');
           <h3>Delivery Brands</h3>
         </li>
         <?php
-      getBrands();
+        getBrands();
         ?>
       </ul>
 
