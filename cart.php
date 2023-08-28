@@ -63,7 +63,8 @@ include('./functions/common_functions.php');
         <a class="nav-link" href="#">Welcome Guest</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Login</a>
+        <a class="nav-link" href="./users_area/user_login.php">Login</a>
+
       </li>
     </ul>
   </div>
@@ -170,7 +171,7 @@ include('./functions/common_functions.php');
       <div class="d-flex gap-3 my-3">
         <h4>Subtotal: <strong class="text-info"><?php echo $total_price ?>/-</strong></h4>
         <a href="index.php"><button class="btn btn-info rounded-0">Continue Shopping</button></a>
-        <a href="checkout.php"><button class="btn btn-secondary rounded-0">Checkout</button></a>
+        <a href="./users_area/checkout.php"><button class="btn btn-secondary rounded-0">Checkout</button></a>
       </div>
   </div>
 <?php

@@ -62,7 +62,7 @@ include('../includes/connect.php');
             <!-- Submit  -->
             <div class="form-outline mb-4 w-50 mx-auto">
                 <input type="submit" name="user_register" class="btn btn-info rounded-0 px-3 mb-2" value="Register" required>
-                <p class="small fw-bold">Already have an acccount? <a href="login.php"> Login</a></p>
+                <p class="small fw-bold">Already have an acccount? <a href="user_login.php"> Login</a></p>
             </div>
         </form>
     </div>
