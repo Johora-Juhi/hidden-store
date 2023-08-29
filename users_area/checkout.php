@@ -38,14 +38,14 @@ include('../functions/common_functions.php');
               <a class="nav-link" href="#">Register</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="cart.php"><i class="fa-solid fa-cart-shopping fa-bounce" style="color: #050505;"></i> <sup><?php cart_items();?></sup></a>
+              <a class="nav-link" href="../cart.php"><i class="fa-solid fa-cart-shopping fa-bounce" style="color: #050505;"></i> <sup><?php cart_items();?></sup></a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Total Price: <?php totalCartPrice();?>/-</a>
             </li>
 
           </ul>
-          <form class="d-flex" action="search_product.php" method="get" role="search">
+          <form class="d-flex" action="../search_product.php" method="get" role="search">
             <input class="form-control me-2 rounded-1" type="search" name="search_data" placeholder="Search" aria-label="Search">
             <input class="btn btn-outline-light" type="submit" name="search_data_product" value="Search">
           </form>
@@ -81,10 +81,14 @@ include('../functions/common_functions.php');
     <div class="col-md-12">
         <div class="row">
             <?php
+            session_start();
+            echo '<pre>';
+            var_dump($_SESSION);
+            echo '</pre>';
             if(!isset($_SESSION['user_email'])){
                 include('./user_login.php');
             }else{
-                include('../payment.php');
+                include('./payment.php');
             }
             ?>
         </div>

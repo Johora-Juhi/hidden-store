@@ -96,8 +96,9 @@ include('../functions/common_functions.php')
             $insert_query = "INSERT INTO `user_table` (username,user_email,user_password,user_image,user_ip,user_address,user_mobile) VALUES ('$name','$email','$hash_password','$user_image','$user_ip','$address','$mobile')";
             $result = mysqli_query($con, $insert_query);
             if ($result) {
+                session_start();
                 $_SESSION['user_email']=$email;
-                echo "<script>alert('user registered successfully')</script>";
+                // echo "<script>alert('user registered successfully')</script>";
             }
         }
 
@@ -107,9 +108,9 @@ include('../functions/common_functions.php')
         $cart_item= mysqli_num_rows($result_cart);
         if($cart_item > 0){
             echo "<script>alert('You have items in the cart')</script>";
-            echo "<script>window.open('./checkout.php')</script>";
+            echo "<script>window.open('./checkout.php','_self')</script>";
         }else {
-            echo "<script>window.open('../index.php')</script>";
+            echo "<script>window.open('../index.php','_self')</script>";
         }
     }
     ?>

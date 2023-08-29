@@ -1,33 +1,8 @@
 <!-- database connection -->
 <?php
 include('../includes/connect.php');
+include('../functions/common_functions.php')
 
-if (isset($_POST['user_login'])) {
-    $username = $_POST['name'];
-    $password = $_POST['password'];
-
-    // check if the user is regidtered 
-    $select_user = "SELECT * FROM `user_table` WHERE username='$username'";
-    $result_user = mysqli_query($con, $select_user);
-    $user_data = mysqli_fetch_assoc($result_user);
-    $user_count = mysqli_num_rows($result_user);
-    if ($user_count > 0) {
-        if (password_verify($password, $user_data['user_password'])) {
-            if (isset($_SERVER['HTTP_REFERER'])) {
-                header("Location: " . $_SERVER['HTTP_REFERER']);
-            } else {
-                // Fallback redirection in case HTTP_REFERER is not available
-                header("Location: index.php"); // Redirect to some default page
-            }
-            echo "<script>alert('logged in successfully')</script>";
-            // exit;
-        } else {
-            echo "<script>alert('Incorrect password')</script>";
-        }
-    } else {
-        echo "<script>alert('User is not registered')</script>";
-    }
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -67,7 +42,39 @@ if (isset($_POST['user_login'])) {
         </form>
     </div>
     <?php
-    
+    if (isset($_POST['user_login'])) {
+        $username = $_POST['name'];
+        $password = $_POST['password'];
+        $user_ip = getIPAddress();
+
+        // check if the user is regidtered 
+        $select_user = "SELECT * FROM `user_table` WHERE username='$username'";
+        $result_user = mysqli_query($con, $select_user);
+        $user_data = mysqli_fetch_assoc($result_user);
+        $user_count = mysqli_num_rows($result_user);
+        
+        // selecting cart items 
+        $select_cart_item = "SELECT * FROM `cart_details` WHERE ip_address='$user_ip'";
+        $result_cart = mysqli_query($con,$select_cart_item);
+        $cart_item= mysqli_num_rows($result_cart);
+
+        if ($user_count > 0) {
+            if (password_verify($password, $user_data['user_password'])) {
+                session_start();
+                $_SESSION['user_email']=$email;
+                if($cart_item > 0){
+                    echo "<script>alert('You have items in the cart')</script>";
+                    echo "<script>window.open('./checkout.php','_self')</script>";
+                }else {
+                    echo "<script>window.open('./profile.php','_self')</script>";
+                }
+            } else {
+                echo "<script>alert('Incorrect password')</script>";
+            }
+        } else {
+            echo "<script>alert('User is not registered')</script>";
+        }
+    }
     ?>
 
     <!-- bootsrap js link  -->
