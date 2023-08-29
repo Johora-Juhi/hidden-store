@@ -2,7 +2,32 @@
 <?php
 include('../includes/connect.php');
 
+if (isset($_POST['user_login'])) {
+    $username = $_POST['name'];
+    $password = $_POST['password'];
 
+    // check if the user is regidtered 
+    $select_user = "SELECT * FROM `user_table` WHERE username='$username'";
+    $result_user = mysqli_query($con, $select_user);
+    $user_data = mysqli_fetch_assoc($result_user);
+    $user_count = mysqli_num_rows($result_user);
+    if ($user_count > 0) {
+        if (password_verify($password, $user_data['user_password'])) {
+            if (isset($_SERVER['HTTP_REFERER'])) {
+                header("Location: " . $_SERVER['HTTP_REFERER']);
+            } else {
+                // Fallback redirection in case HTTP_REFERER is not available
+                header("Location: index.php"); // Redirect to some default page
+            }
+            echo "<script>alert('logged in successfully')</script>";
+            // exit;
+        } else {
+            echo "<script>alert('Incorrect password')</script>";
+        }
+    } else {
+        echo "<script>alert('User is not registered')</script>";
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -41,7 +66,9 @@ include('../includes/connect.php');
             </div>
         </form>
     </div>
-
+    <?php
+    
+    ?>
 
     <!-- bootsrap js link  -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>

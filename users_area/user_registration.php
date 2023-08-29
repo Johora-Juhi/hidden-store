@@ -102,7 +102,7 @@ include('../functions/common_functions.php')
         }
 
         // selecting cart items 
-        $select_cart_item = "SELECT FROM `cart_details` WHERE ip_address=$user_ip";
+        $select_cart_item = "SELECT * FROM `cart_details` WHERE ip_address='$user_ip'";
         $result_cart = mysqli_query($con,$select_cart_item);
         $cart_item= mysqli_num_rows($result_cart);
         if($cart_item > 0){
