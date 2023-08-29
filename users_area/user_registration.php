@@ -2,8 +2,8 @@
 <?php
 include('../includes/connect.php');
 include('../functions/common_functions.php')
-
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -67,39 +67,40 @@ include('../functions/common_functions.php')
         </form>
     </div>
 
-<?php
-if(isset($_POST['user_register'])){
-    $name=$_POST['name'];
-    $email=$_POST['email'];
-    $user_image=$_FILES['user_image']['name'];
-    $user_image_tmp=$_FILES['user_image']['tmp_name'];
-    $password=$_POST['password'];
-    $confirm_password=$_POST['confirm_password'];
-    $address=$_POST['address'];
-    $mobile=$_POST['mobile'];
-    $user_ip=getIPAddress();
+    <?php
+    if (isset($_POST['user_register'])) {
+        $name = $_POST['name'];
+        $email = $_POST['email'];
+        $user_image = $_FILES['user_image']['name'];
+        $user_image_tmp = $_FILES['user_image']['tmp_name'];
+        $password = $_POST['password'];
+        $hash_password= password_hash($password,PASSWORD_DEFAULT);
+        $confirm_password = $_POST['confirm_password'];
+        $address = $_POST['address'];
+        $mobile = $_POST['mobile'];
+        $user_ip = getIPAddress();
 
-    // move images 
-    move_uploaded_file($user_image_tmp,"./user_images/$user_image");
+        // move images 
+        move_uploaded_file($user_image_tmp, "./user_images/$user_image");
 
-    // sellect query 
-    $select_query= "SELECT * FROM `user_table` WHERE username='$name' or user_email='$email'";
-    $result_user=mysqli_query($con,$select_query);
-    $number = mysqli_num_rows($result_user);
-    if($number>0){
-        echo "<script>alert('Username and email already exist')</script>";
-    }else if($password !== $confirm_password){
-        echo "<script>alert('Password does not match')</script>";
-    }else{
-    // insert quert 
-    $insert_query = "INSERT INTO `user_table` (username,user_email,user_password,user_image,user_ip,user_address,user_mobile) VALUES ('$name','$email','$password','$user_image','$user_ip','$address','$mobile')";
-    $result= mysqli_query($con,$insert_query);
-    if($result){
-        echo "<script>alert('user registered successfully')</script>";
+        // sellect query 
+        $select_query = "SELECT * FROM `user_table` WHERE username='$name' or user_email='$email'";
+        $result_user = mysqli_query($con, $select_query);
+        $number = mysqli_num_rows($result_user);
+        if ($number > 0) {
+            echo "<script>alert('Username and email already exist')</script>";
+        } else if ($password !== $confirm_password) {
+            echo "<script>alert('Password does not match')</script>";
+        } else {
+            // insert quert 
+            $insert_query = "INSERT INTO `user_table` (username,user_email,user_password,user_image,user_ip,user_address,user_mobile) VALUES ('$name','$email','$hash_password','$user_image','$user_ip','$address','$mobile')";
+            $result = mysqli_query($con, $insert_query);
+            if ($result) {
+                echo "<script>alert('user registered successfully')</script>";
+            }
+        }
     }
-}
-}
-?>
+    ?>
     <!-- bootsrap js link  -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 </body>
