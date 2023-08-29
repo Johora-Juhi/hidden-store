@@ -1,7 +1,8 @@
 <!-- database connection -->
 <?php
 include('../includes/connect.php');
-include('../functions/common_functions.php')
+include('../functions/common_functions.php');
+@session_start();
 ?>
 
 <!DOCTYPE html>
@@ -96,7 +97,7 @@ include('../functions/common_functions.php')
             $insert_query = "INSERT INTO `user_table` (username,user_email,user_password,user_image,user_ip,user_address,user_mobile) VALUES ('$name','$email','$hash_password','$user_image','$user_ip','$address','$mobile')";
             $result = mysqli_query($con, $insert_query);
             if ($result) {
-                session_start();
+                
                 $_SESSION['user_email']=$email;
                 // echo "<script>alert('user registered successfully')</script>";
             }

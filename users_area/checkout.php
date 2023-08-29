@@ -2,6 +2,7 @@
 <?php
 include('../includes/connect.php');
 include('../functions/common_functions.php');
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,7 +36,7 @@ include('../functions/common_functions.php');
               <a class="nav-link" href="../display_all.php">Products</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Register</a>
+              <a class="nav-link" href="./user_registration.php">Register</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="../cart.php"><i class="fa-solid fa-cart-shopping fa-bounce" style="color: #050505;"></i> <sup><?php cart_items();?></sup></a>
@@ -62,13 +63,30 @@ include('../functions/common_functions.php');
   <!-- second child  -->
   <div class="navbar navbar-expand-lg bg-secondary">
     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-      <li class="nav-item">
-        <a class="nav-link" href="#">Welcome Guest</a>
+    <?php
+      
+      if (!isset($_SESSION['user_email'])) {
+        echo "
+        <li class='nav-item'>
+        <a class='nav-link' href='#'>Welcome Guest</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="./user_login.php">Login</a>
+      <li class='nav-item'>
+        <a class='nav-link' href='./user_login.php'>Login</a>
 
       </li>
+        ";
+      } else {
+        echo "
+        <li class='nav-item'>
+        <a class='nav-link' href='#'>Welcome " . $_SESSION['user_email'] . "</a>
+      </li>
+      <li class='nav-item'>
+        <a class='nav-link' href='./logout.php'>Logout</a>
+
+      </li>
+        ";
+      }
+      ?>
     </ul>
   </div>
   <!-- third child  -->
@@ -81,10 +99,6 @@ include('../functions/common_functions.php');
     <div class="col-md-12">
         <div class="row">
             <?php
-            session_start();
-            echo '<pre>';
-            var_dump($_SESSION);
-            echo '</pre>';
             if(!isset($_SESSION['user_email'])){
                 include('./user_login.php');
             }else{

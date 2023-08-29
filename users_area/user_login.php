@@ -1,7 +1,8 @@
 <!-- database connection -->
 <?php
 include('../includes/connect.php');
-include('../functions/common_functions.php')
+include('../functions/common_functions.php');
+@session_start();
 
 ?>
 <!DOCTYPE html>
@@ -60,8 +61,7 @@ include('../functions/common_functions.php')
 
         if ($user_count > 0) {
             if (password_verify($password, $user_data['user_password'])) {
-                session_start();
-                $_SESSION['user_email']=$email;
+                $_SESSION['user_email']=$username;
                 if($cart_item > 0){
                     echo "<script>alert('You have items in the cart')</script>";
                     echo "<script>window.open('./checkout.php','_self')</script>";

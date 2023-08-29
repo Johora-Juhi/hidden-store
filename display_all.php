@@ -2,6 +2,7 @@
 <?php
 include('./includes/connect.php');
 include('./functions/common_functions.php');
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,13 +36,13 @@ include('./functions/common_functions.php');
               <a class="nav-link" href="display_all.php">Products</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Register</a>
+              <a class="nav-link" href="./users_area/user_registration.php">Register</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="cart.php"><i class="fa-solid fa-cart-shopping fa-bounce" style="color: #050505;"></i> <sup><?php cart_items();?></sup></a>
+              <a class="nav-link" href="cart.php"><i class="fa-solid fa-cart-shopping fa-bounce" style="color: #050505;"></i> <sup><?php cart_items(); ?></sup></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Total Price: <?php totalCartPrice();?>/-</a>
+              <a class="nav-link" href="#">Total Price: <?php totalCartPrice(); ?>/-</a>
             </li>
 
           </ul>
@@ -62,13 +63,31 @@ include('./functions/common_functions.php');
   <!-- second child  -->
   <div class="navbar navbar-expand-lg bg-secondary">
     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-      <li class="nav-item">
-        <a class="nav-link" href="#">Welcome Guest</a>
+      <?php
+      
+      if (!isset($_SESSION['user_email'])) {
+        echo "
+        <li class='nav-item'>
+        <a class='nav-link' href='#'>Welcome Guest</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="./users_area/user_login.php">Login</a>
+      <li class='nav-item'>
+        <a class='nav-link' href='./users_area/user_login.php'>Login</a>
 
       </li>
+        ";
+      } else {
+        echo "
+        <li class='nav-item'>
+        <a class='nav-link' href='#'>Welcome " . $_SESSION['user_email'] . "</a>
+      </li>
+      <li class='nav-item'>
+        <a class='nav-link' href='./users_area/logout.php'>Logout</a>
+
+      </li>
+        ";
+      }
+      ?>
+
     </ul>
   </div>
   <!-- third child  -->
@@ -100,24 +119,24 @@ include('./functions/common_functions.php');
         ?>
       </ul>
 
-            <!-- categories  -->
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-center text-light ">
-                <li class="nav-item mb-2 bg-info">
-                    <h3>Categories</h3>
-                </li>
-                <?php
-                $select_categories = 'SELECT * FROM `categories`';
-                $result_categories = mysqli_query($con, $select_categories);
-                while ($row_data = mysqli_fetch_assoc($result_categories)) {
-                    $category_title = $row_data['category_title'];
-                    $category_id = $row_data['category_id'];
-                    echo "<li class='nav-item mb-2'><a href='index.php?category=$category_id' class='nav-link'>$category_title</a></li>";
-                }
-                ?>
-            </ul>
+      <!-- categories  -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-center text-light ">
+        <li class="nav-item mb-2 bg-info">
+          <h3>Categories</h3>
+        </li>
+        <?php
+        $select_categories = 'SELECT * FROM `categories`';
+        $result_categories = mysqli_query($con, $select_categories);
+        while ($row_data = mysqli_fetch_assoc($result_categories)) {
+          $category_title = $row_data['category_title'];
+          $category_id = $row_data['category_id'];
+          echo "<li class='nav-item mb-2'><a href='index.php?category=$category_id' class='nav-link'>$category_title</a></li>";
+        }
+        ?>
+      </ul>
 
-        </div>
     </div>
+  </div>
   </div>
   <!-- last-child  -->
   <?php
