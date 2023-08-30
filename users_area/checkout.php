@@ -50,6 +50,9 @@ session_start();
             <input class="form-control me-2 rounded-1" type="search" name="search_data" placeholder="Search" aria-label="Search">
             <input class="btn btn-outline-light" type="submit" name="search_data_product" value="Search">
           </form>
+          <div>
+            
+          </div>
         </div>
       </div>
     </nav>
