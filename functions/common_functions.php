@@ -327,8 +327,8 @@ function totalCartPrice()
       $product_price = array($row_product_price['product_price']);
       $product_price_sum = array_sum($product_price);
       // echo "$product_price_sum";
+      $total_price += $product_price_sum;
     }
-    $total_price += $product_price_sum;
   }
   echo "$total_price";
 }
