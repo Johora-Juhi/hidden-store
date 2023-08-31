@@ -1,7 +1,7 @@
 <!-- database connection -->
 <?php
-include('../includes/connect.php');
-include('../functions/common_functions.php');
+include_once('../includes/connect.php');
+include_once('../functions/common_functions.php');
 @session_start();
 ?>
 
@@ -98,7 +98,7 @@ include('../functions/common_functions.php');
             $result = mysqli_query($con, $insert_query);
             if ($result) {
 
-                $_SESSION['username'] = $email;
+                $_SESSION['username'] = $name;
                 // echo "<script>alert('user registered successfully')</script>";
             }
         }

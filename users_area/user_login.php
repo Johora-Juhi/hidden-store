@@ -1,7 +1,7 @@
 <!-- database connection -->
 <?php
-include('../includes/connect.php');
-include('../functions/common_functions.php');
+include_once('../includes/connect.php');
+include_once('../functions/common_functions.php');
 @session_start();
 
 ?>

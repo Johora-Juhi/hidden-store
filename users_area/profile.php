@@ -111,6 +111,11 @@ session_start();
                 $select_user = "SELECT * FROM `user_table` where username = '$username'";
                 $result_user = mysqli_query($con, $select_user);
                 $user = mysqli_fetch_assoc($result_user);
+                $user_id= $user['user_id'];
+                $username= $user['username'];
+                $user_email= $user['user_email'];
+                $user_address= $user['user_address'];
+                $user_mobile= $user['user_mobile'];
                 $user_image = $user['user_image'];
                 echo "
                 <li class='nav-item'>
