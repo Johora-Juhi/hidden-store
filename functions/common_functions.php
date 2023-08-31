@@ -334,28 +334,29 @@ function totalCartPrice()
 }
 
 // get users pendung orders 
-function get_pending_orders(){
-global $con;
-$username = $_SESSION['username'];
+function get_pending_orders()
+{
+  global $con;
+  $username = $_SESSION['username'];
 
-                $select_user = "SELECT * FROM `user_table` where username = '$username'";
-                $result_user = mysqli_query($con, $select_user);
-                $user = mysqli_fetch_assoc($result_user);
-                $user_id = $user['user_id'];
-if(!isset($_GET['edit_account'])){
-  if(!isset($_GET['my_orders'])){
-    if(!isset($_GET['delete_account'])){
-      $select_pending_orders="SELECT * FROM `orders_pending` where user_id=$user_id and orders_status='pending'";
-      $result_pending_orders = mysqli_query($con,$select_pending_orders);
-      $orders_count= mysqli_num_rows($result_pending_orders);
-      if($orders_count > 0){
-    echo "<h2 class='text-center text-success mt-5 mb-3'> You have <span class='text-danger'>$orders_count</span> pending orders</h2>
+  $select_user = "SELECT * FROM `user_table` where username = '$username'";
+  $result_user = mysqli_query($con, $select_user);
+  $user = mysqli_fetch_assoc($result_user);
+  $user_id = $user['user_id'];
+  if (!isset($_GET['edit_account'])) {
+    if (!isset($_GET['my_orders'])) {
+      if (!isset($_GET['delete_account'])) {
+        $select_pending_orders = "SELECT * FROM `orders_pending` where user_id=$user_id and orders_status='pending'";
+        $result_pending_orders = mysqli_query($con, $select_pending_orders);
+        $orders_count = mysqli_num_rows($result_pending_orders);
+        if ($orders_count > 0) {
+          echo "<h2 class='text-center text-success mt-5 mb-3'> You have <span class='text-danger'>$orders_count</span> pending orders</h2>
     <p class='text-center'><a href='profile.php?my_orders'>Order details</a></p>";
-      }else{
-        echo "<h2 class='text-center text-success mt-5 mb-3'> You have zero pending orders</h2>
+        } else {
+          echo "<h2 class='text-center text-success mt-5 mb-3'> You have zero pending orders</h2>
     <p class='text-center'><a href='../index.php'>Explore more</a></p>";
+        }
       }
     }
   }
-}
 }

@@ -133,10 +133,13 @@ session_start();
                     <a class='nav-link' href='./logout.php'>Logout</a>
             </ul>
         </div>
-        <div class="col-md-10">
-<?php
-get_pending_orders()
-?>
+        <div class="col-md-10 text-center">
+            <?php
+            get_pending_orders();
+            if(isset($_GET['edit_account'])){
+                include('./edit_account.php');
+            }
+            ?>
         </div>
     </div>
     <!-- last-child  -->
