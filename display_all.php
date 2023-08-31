@@ -64,8 +64,8 @@ session_start();
   <div class="navbar navbar-expand-lg bg-secondary">
     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
       <?php
-      
-      if (!isset($_SESSION['user_email'])) {
+
+      if (!isset($_SESSION['username'])) {
         echo "
         <li class='nav-item'>
         <a class='nav-link' href='#'>Welcome Guest</a>
@@ -78,7 +78,7 @@ session_start();
       } else {
         echo "
         <li class='nav-item'>
-        <a class='nav-link' href='#'>Welcome " . $_SESSION['user_email'] . "</a>
+        <a class='nav-link' href='#'>Welcome " . $_SESSION['username'] . "</a>
       </li>
       <li class='nav-item'>
         <a class='nav-link' href='./users_area/logout.php'>Logout</a>

@@ -75,7 +75,7 @@ include('../functions/common_functions.php');
         $user_image = $_FILES['user_image']['name'];
         $user_image_tmp = $_FILES['user_image']['tmp_name'];
         $password = $_POST['password'];
-        $hash_password= password_hash($password,PASSWORD_DEFAULT);
+        $hash_password = password_hash($password, PASSWORD_DEFAULT);
         $confirm_password = $_POST['confirm_password'];
         $address = $_POST['address'];
         $mobile = $_POST['mobile'];
@@ -97,20 +97,20 @@ include('../functions/common_functions.php');
             $insert_query = "INSERT INTO `user_table` (username,user_email,user_password,user_image,user_ip,user_address,user_mobile) VALUES ('$name','$email','$hash_password','$user_image','$user_ip','$address','$mobile')";
             $result = mysqli_query($con, $insert_query);
             if ($result) {
-                
-                $_SESSION['user_email']=$email;
+
+                $_SESSION['username'] = $email;
                 // echo "<script>alert('user registered successfully')</script>";
             }
         }
 
         // selecting cart items 
         $select_cart_item = "SELECT * FROM `cart_details` WHERE ip_address='$user_ip'";
-        $result_cart = mysqli_query($con,$select_cart_item);
-        $cart_item= mysqli_num_rows($result_cart);
-        if($cart_item > 0){
+        $result_cart = mysqli_query($con, $select_cart_item);
+        $cart_item = mysqli_num_rows($result_cart);
+        if ($cart_item > 0) {
             echo "<script>alert('You have items in the cart')</script>";
             echo "<script>window.open('./checkout.php','_self')</script>";
-        }else {
+        } else {
             echo "<script>window.open('../index.php','_self')</script>";
         }
     }

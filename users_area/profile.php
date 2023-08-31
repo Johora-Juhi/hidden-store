@@ -10,7 +10,7 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo "Welcome " . $_SESSION['user_email']; ?></title>
+    <title><?php echo "Welcome " . $_SESSION['username']; ?></title>
     <!-- bootstrap link -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <!-- fontawosome link  -->
@@ -67,7 +67,7 @@ session_start();
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <?php
 
-            if (!isset($_SESSION['user_email'])) {
+            if (!isset($_SESSION['username'])) {
                 echo "
         <li class='nav-item'>
         <a class='nav-link' href='#'>Welcome Guest</a>
@@ -80,7 +80,7 @@ session_start();
             } else {
                 echo "
         <li class='nav-item'>
-        <a class='nav-link' href='#'>Welcome " . $_SESSION['user_email'] . "</a>
+        <a class='nav-link' href='#'>Welcome " . $_SESSION['username'] . "</a>
       </li>
       <li class='nav-item'>
         <a class='nav-link' href='./logout.php'>Logout</a>
@@ -106,10 +106,10 @@ session_start();
                     </a>
                 </li>
                 <?php
-                $username=$_SESSION['user_email'];
+                $username = $_SESSION['username'];
 
-                $select_user= "SELECT * FROM `user_table` where username = '$username'";
-                $result_user = mysqli_query($con,$select_user);
+                $select_user = "SELECT * FROM `user_table` where username = '$username'";
+                $result_user = mysqli_query($con, $select_user);
                 $user = mysqli_fetch_assoc($result_user);
                 $user_image = $user['user_image'];
                 echo "
@@ -118,23 +118,25 @@ session_start();
                 </li>"
                 ?>
                 <li class='nav-item'>
-                    <a class='nav-link' href=''>Pending Orders</a>
+                    <a class='nav-link' href='./profile.php'>Pending Orders</a>
                 </li>
                 <li class='nav-item'>
-                    <a class='nav-link' href=''>Edit Account</a>
+                    <a class='nav-link' href='./profile.php?edit_account'>Edit Account</a>
                 </li>
                 <li class='nav-item'>
-                    <a class='nav-link' href=''>My orders</a>
+                    <a class='nav-link' href='./profile.php?my_orders'>My orders</a>
                 </li>
                 <li class='nav-item'>
-                    <a class='nav-link' href=''>Delete Account</a>
+                    <a class='nav-link' href='./profile.php?delete_account'>Delete Account</a>
                 </li>
                 <li class='nav-item'>
                     <a class='nav-link' href='./logout.php'>Logout</a>
             </ul>
         </div>
         <div class="col-md-10">
-
+<?php
+get_pending_orders()
+?>
         </div>
     </div>
     <!-- last-child  -->

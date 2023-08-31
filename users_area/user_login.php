@@ -53,19 +53,19 @@ include('../functions/common_functions.php');
         $result_user = mysqli_query($con, $select_user);
         $user_data = mysqli_fetch_assoc($result_user);
         $user_count = mysqli_num_rows($result_user);
-        
+
         // selecting cart items 
         $select_cart_item = "SELECT * FROM `cart_details` WHERE ip_address='$user_ip'";
-        $result_cart = mysqli_query($con,$select_cart_item);
-        $cart_item= mysqli_num_rows($result_cart);
+        $result_cart = mysqli_query($con, $select_cart_item);
+        $cart_item = mysqli_num_rows($result_cart);
 
         if ($user_count > 0) {
             if (password_verify($password, $user_data['user_password'])) {
-                $_SESSION['user_email']=$username;
-                if($cart_item > 0){
+                $_SESSION['username'] = $username;
+                if ($cart_item > 0) {
                     echo "<script>alert('You have items in the cart')</script>";
                     echo "<script>window.open('./checkout.php','_self')</script>";
-                }else {
+                } else {
                     echo "<script>window.open('./profile.php','_self')</script>";
                 }
             } else {
