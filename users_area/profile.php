@@ -36,16 +36,16 @@ session_start();
                             <a class="nav-link" href="../display_all.php">Products</a>
                         </li>
                         <?php
-            if (isset($_SESSION['username'])) {
-              echo "<li class='nav-item'>
+                        if (isset($_SESSION['username'])) {
+                            echo "<li class='nav-item'>
               <a class='nav-link' href='./profile.php'>My Account</a>
             </li>";
-            } else {
-              echo "<li class='nav-item'>
+                        } else {
+                            echo "<li class='nav-item'>
               <a class='nav-link' href='./user_registration.php'>Register</a>
             </li>";
-            }
-            ?>
+                        }
+                        ?>
                         <li class="nav-item">
                             <a class="nav-link" href="../cart.php"><i class="fa-solid fa-cart-shopping fa-bounce" style="color: #050505;"></i> <sup><?php cart_items(); ?></sup></a>
                         </li>
@@ -154,6 +154,9 @@ session_start();
             }
             if (isset($_GET['my_orders'])) {
                 include('./user_orders.php');
+            }
+            if (isset($_GET['delete_account'])) {
+                include('./delete_account.php');
             }
             ?>
         </div>
