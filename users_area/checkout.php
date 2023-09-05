@@ -95,7 +95,7 @@ session_start();
   <!-- third child  -->
   <div class="bg-light text-center">
     <h3>Hidden Store</h3>
-    <p>Communication is the heart o ecommere and community</p>
+    <p>Communication is the heart of ecommere and community</p>
   </div>
   <!-- fourth-child  -->
   <div class="row">

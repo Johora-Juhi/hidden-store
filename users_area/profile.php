@@ -35,9 +35,17 @@ session_start();
                         <li class="nav-item">
                             <a class="nav-link" href="../display_all.php">Products</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./user_registration.php">Register</a>
-                        </li>
+                        <?php
+            if (isset($_SESSION['username'])) {
+              echo "<li class='nav-item'>
+              <a class='nav-link' href='./profile.php'>My Account</a>
+            </li>";
+            } else {
+              echo "<li class='nav-item'>
+              <a class='nav-link' href='./user_registration.php'>Register</a>
+            </li>";
+            }
+            ?>
                         <li class="nav-item">
                             <a class="nav-link" href="../cart.php"><i class="fa-solid fa-cart-shopping fa-bounce" style="color: #050505;"></i> <sup><?php cart_items(); ?></sup></a>
                         </li>
@@ -94,7 +102,7 @@ session_start();
     <!-- third child  -->
     <div class="bg-light text-center">
         <h3>Hidden Store</h3>
-        <p>Communication is the heart o ecommere and community</p>
+        <p>Communication is the heart of ecommere and community</p>
     </div>
     <!-- fourth-child  -->
     <div class="row">
@@ -111,11 +119,11 @@ session_start();
                 $select_user = "SELECT * FROM `user_table` where username = '$username'";
                 $result_user = mysqli_query($con, $select_user);
                 $user = mysqli_fetch_assoc($result_user);
-                $user_id= $user['user_id'];
-                $username= $user['username'];
-                $user_email= $user['user_email'];
-                $user_address= $user['user_address'];
-                $user_mobile= $user['user_mobile'];
+                $user_id = $user['user_id'];
+                $username = $user['username'];
+                $user_email = $user['user_email'];
+                $user_address = $user['user_address'];
+                $user_mobile = $user['user_mobile'];
                 $user_image = $user['user_image'];
                 echo "
                 <li class='nav-item'>
@@ -134,15 +142,18 @@ session_start();
                 <li class='nav-item'>
                     <a class='nav-link' href='./profile.php?delete_account'>Delete Account</a>
                 </li>
-                <li class='nav-item'>
+                <li class='nav-item pb-4'>
                     <a class='nav-link' href='./logout.php'>Logout</a>
             </ul>
         </div>
         <div class="col-md-10 text-center">
             <?php
             get_pending_orders();
-            if(isset($_GET['edit_account'])){
+            if (isset($_GET['edit_account'])) {
                 include('./edit_account.php');
+            }
+            if (isset($_GET['my_orders'])) {
+                include('./user_orders.php');
             }
             ?>
         </div>

@@ -35,9 +35,17 @@ session_start();
             <li class="nav-item">
               <a class="nav-link" href="display_all.php">Products</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="./users_area/user_registration.php">Register</a>
-            </li>
+            <?php
+            if (isset($_SESSION['username'])) {
+              echo "<li class='nav-item'>
+              <a class='nav-link' href='./users_area/profile.php'>My Account</a>
+            </li>";
+            } else {
+              echo "<li class='nav-item'>
+              <a class='nav-link' href='./users_area/user_registration.php'>Register</a>
+            </li>";
+            }
+            ?>
             <li class="nav-item">
               <a class="nav-link" href="cart.php"><i class="fa-solid fa-cart-shopping fa-bounce" style="color: #050505;"></i> <sup><?php cart_items(); ?></sup></a>
             </li>
@@ -89,7 +97,7 @@ session_start();
   <!-- third child  -->
   <div class="bg-light text-center">
     <h3>Hidden Store</h3>
-    <p>Communication is the heart o ecommere and community</p>
+    <p>Communication is the heart of ecommere and community</p>
   </div>
   <!-- fourth-child  -->
   <div class="container">
