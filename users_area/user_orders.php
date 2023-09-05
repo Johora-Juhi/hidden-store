@@ -24,7 +24,7 @@
             $total_products = $orders['total_products'];
             $order_date = $orders['order_date'];
             $order_status = $orders['order_status'];
-            if ($order_status = "pending") {
+            if ($order_status == "pending") {
                 $order_status = "Incomplete";
             } else {
                 $order_status = "Complete";
@@ -36,9 +36,17 @@
             <td>$amount_due</td>
             <td>$invoice_number</td>
             <td>$order_date</td>
-            <td>$order_status</td>
-            <td> <a href='confirm_payment.php?order_id=$order_id' class='text-black'>Confirm</a> </td>
-        </tr>";
+            <td>$order_status</td>";
+            ?>
+            <?php
+
+            if($order_status=='Complete'){
+                echo "<th>Paid</th>";
+            }else{
+                echo " <td> <a href='confirm_payment.php?order_id=$order_id' class='text-black'>Confirm</a> </td>
+                </tr>";
+            }
+           
             $number++;
         }
         ?>
