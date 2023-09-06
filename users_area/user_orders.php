@@ -37,16 +37,16 @@
             <td>$invoice_number</td>
             <td>$order_date</td>
             <td>$order_status</td>";
-            ?>
-            <?php
+        ?>
+        <?php
 
-            if($order_status=='Complete'){
+            if ($order_status == 'Complete') {
                 echo "<th>Paid</th>";
-            }else{
+            } else {
                 echo " <td> <a href='confirm_payment.php?order_id=$order_id' class='text-black'>Confirm</a> </td>
                 </tr>";
             }
-           
+
             $number++;
         }
         ?>

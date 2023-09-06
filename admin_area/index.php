@@ -1,3 +1,10 @@
+<!-- database connection  -->
+<?php
+include('../includes/connect.php');
+include('../functions/common_functions.php');
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -33,7 +40,6 @@
     <div class="container-fluid bg-light text-center p-2">
       <h1>Manage Details</h1>
     </div>
-<!-- helu  -->
     <!-- third child  -->
     <div class="row">
       <div class="col-md-12 d-flex bg-secondary align-items-center">
@@ -43,7 +49,7 @@
         </div>
         <div class="button text-center">
           <button><a href="insert_product.php" class="nav-link bg-info text-light p-2">Insert Products</a></button>
-          <button><a href="" class="nav-link bg-info text-light p-2">View Products</a></button>
+          <button><a href="index.php?view_products" class="nav-link bg-info text-light p-2">View Products</a></button>
           <button><a href="index.php?insert_categories" class="nav-link bg-info text-light p-2">Insert Categories</a></button>
           <button><a href="" class="nav-link bg-info text-light p-2">View Categories</a></button>
           <button><a href="index.php?insert_brands" class="nav-link bg-info text-light p-2">Insert Brands</a></button>
@@ -65,10 +71,14 @@
       if (isset($_GET['insert_brands'])) {
         include('insert_brands.php');
       }
+      if (isset($_GET['view_products'])) {
+        include('./view_products.php');
+      }
+
       ?>
     </div>
     <!-- last-child  -->
-    <div class="container-fluid p-3 text-center bg-info footer">
+    <div class="container-fluid p-3 text-center bg-info">
       <p>All rights reserved @- juu-2023</p>
     </div>
   </div>
