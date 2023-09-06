@@ -28,18 +28,24 @@
             $result = mysqli_query($con, $get_products);
             while ($products = mysqli_fetch_array($result)) {
                 $product_id = $products['product_id'];
+                $product_description = $products['product_description'];
+                $product_keywords = $products['product_keywords'];
+                $category_id = $products['category_id'];
+                $barnd_id = $products['barnd_id'];
                 $product_title = $products['product_title'];
                 $product_image1 = $products['product_image1'];
+                $product_image2 = $products['product_image2'];
+                $product_image3 = $products['product_image3'];
                 $product_price = $products['product_price'];
                 $status = $products['status'];
-                // $product_id = $products['product_id'];
+                $date = $products['date'];
             ?>
                 <tr>
                     <td><?php echo $product_id ?></td>
                     <td><?php echo $product_title ?></td>
-                    <td><img src="./product_images/<?php echo $product_image1 ?>" alt="" class="w-25 mx-auto"></td>
+                    <td><img src="./product_images/<?php echo $product_image1 ?>" alt="" class="product_img"></td>
                     <td><?php echo $product_price . "/-" ?> </td>
-                    <td class="w-full"><?php
+                    <td><?php
                                         $get_pending_products = "Select * from `orders_pending` where product_id=$product_id";
                                         $result_products = mysqli_query($con, $get_pending_products);
                                         $total_quantity = 0;
@@ -50,7 +56,7 @@
                                         echo $total_quantity;
                                         ?></td>
                     <td><?php echo $status ?></td>
-                    <td><a href="index.php?edit_products" class="text-black"><i class="fa-solid fa-pen-to-square"></i></a></td>
+                    <td><a href="index.php?edit_products=<?php echo $product_id?>" class="text-black"><i class="fa-solid fa-pen-to-square"></i></a></td>
                     <td><a href="" class="text-black"><i class="fa-solid fa-trash"></i></a></td>
                 </tr>
             <?php } ?>

@@ -25,6 +25,10 @@
   height: 80px;
   object-fit: contain;
 }
+.product_img{
+  width: 100px;
+  object-fit: contain;
+}
 .footer {
   position: absolute;
   bottom: 0;
