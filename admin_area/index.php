@@ -51,9 +51,9 @@ session_start();
           <button><a href="insert_product.php" class="nav-link bg-info text-light p-2">Insert Products</a></button>
           <button><a href="index.php?view_products" class="nav-link bg-info text-light p-2">View Products</a></button>
           <button><a href="index.php?insert_categories" class="nav-link bg-info text-light p-2">Insert Categories</a></button>
-          <button><a href="" class="nav-link bg-info text-light p-2">View Categories</a></button>
+          <button><a href="index.php?view_categories" class="nav-link bg-info text-light p-2">View Categories</a></button>
           <button><a href="index.php?insert_brands" class="nav-link bg-info text-light p-2">Insert Brands</a></button>
-          <button><a href="" class="nav-link bg-info text-light p-2">View Brands</a></button>
+          <button><a href="index.php?view_brands" class="nav-link bg-info text-light p-2">View Brands</a></button>
           <button><a href="" class="nav-link bg-info text-light p-2">All Orders </a></button>
           <button><a href="" class="nav-link bg-info text-light p-2">All Payments</a></button>
           <button><a href="" class="nav-link bg-info text-light p-2">Users List</a></button>
@@ -77,8 +77,14 @@ session_start();
       if (isset($_GET['edit_products'])) {
         include('./edit_products.php');
       }
-      if (isset($_GET['delte_product'])) {
+      if (isset($_GET['delete_product'])) {
         include('./delete_product.php');
+      }
+      if (isset($_GET['view_categories'])) {
+        include('./view_categories.php');
+      }
+      if (isset($_GET['view_brands'])) {
+        include('./view_brands.php');
       }
 
       ?>
