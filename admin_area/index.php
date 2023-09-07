@@ -54,7 +54,7 @@ session_start();
           <button><a href="index.php?view_categories" class="nav-link bg-info text-light p-2">View Categories</a></button>
           <button><a href="index.php?insert_brands" class="nav-link bg-info text-light p-2">Insert Brands</a></button>
           <button><a href="index.php?view_brands" class="nav-link bg-info text-light p-2">View Brands</a></button>
-          <button><a href="" class="nav-link bg-info text-light p-2">All Orders </a></button>
+          <button><a href="index.php?all_orders" class="nav-link bg-info text-light p-2">All Orders </a></button>
           <button><a href="" class="nav-link bg-info text-light p-2">All Payments</a></button>
           <button><a href="" class="nav-link bg-info text-light p-2">Users List</a></button>
           <button><a href="" class="nav-link bg-info text-light p-2">Logout</a></button>
@@ -97,6 +97,12 @@ session_start();
       }
       if (isset($_GET['delete_brand'])) {
         include('./delete_brand.php');
+      }
+      if (isset($_GET['all_orders'])) {
+        include('./all_orders.php');
+      }
+      if (isset($_GET['delete_order'])) {
+        include('./delete_order.php');
       }
 
       ?>
