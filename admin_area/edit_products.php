@@ -144,10 +144,10 @@ if (isset($_POST['edit_product'])) {
         $update_image3 = $product_image3;
     }
 
-    $update_product = "Update `products` SET product_title = '$product_title', product_description = '$product_description', product_keywords = '$product_keywords', category_id = $product_category, barnd_id=$product_brand, product_image1 = '$update_image1', product_image2 = '$update_image2', product_image3 = '$update_image2', product_price = '$product_price', date= NOW() where product_id = $edit_id";
+    $update_product = "Update `products` SET product_title = '$product_title', product_description = '$product_description', product_keywords = '$product_keywords', category_id = $product_category, barnd_id=$product_brand, product_image1 = '$update_image1', product_image2 = '$update_image2', product_image3 = '$update_image3', product_price = '$product_price', date= NOW() where product_id = $edit_id";
 
-    $result_products= mysqli_query($con,$update_product);
-    if($result_products){
+    $result_products = mysqli_query($con, $update_product);
+    if ($result_products) {
         echo "<script>alert('Product Updated')</script>";
         echo "<script>window.open('./index.php?view_products','_self')</script>";
     }
