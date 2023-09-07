@@ -46,18 +46,18 @@
                     <td><img src="./product_images/<?php echo $product_image1 ?>" alt="" class="product_img"></td>
                     <td><?php echo $product_price . "/-" ?> </td>
                     <td><?php
-                                        $get_pending_products = "Select * from `orders_pending` where product_id=$product_id";
-                                        $result_products = mysqli_query($con, $get_pending_products);
-                                        $total_quantity = 0;
-                                        while ($pending_products = mysqli_fetch_assoc($result_products)) {
-                                            $quantity = $pending_products['quantity'];
-                                            $total_quantity += $quantity;
-                                        };;
-                                        echo $total_quantity;
-                                        ?></td>
+                        $get_pending_products = "Select * from `orders_pending` where product_id=$product_id";
+                        $result_products = mysqli_query($con, $get_pending_products);
+                        $total_quantity = 0;
+                        while ($pending_products = mysqli_fetch_assoc($result_products)) {
+                            $quantity = $pending_products['quantity'];
+                            $total_quantity += $quantity;
+                        };;
+                        echo $total_quantity;
+                        ?></td>
                     <td><?php echo $status ?></td>
-                    <td><a href="index.php?edit_products=<?php echo $product_id?>" class="text-black"><i class="fa-solid fa-pen-to-square"></i></a></td>
-                    <td><a href="index.php?delete_product=<?php echo $product_id?>" class="text-black"><i class="fa-solid fa-trash"></i></a></td>
+                    <td><a href="index.php?edit_products=<?php echo $product_id ?>" class="text-black"><i class="fa-solid fa-pen-to-square"></i></a></td>
+                    <td><a href="index.php?delete_product=<?php echo $product_id ?>" class="text-black"><i class="fa-solid fa-trash"></i></a></td>
                 </tr>
             <?php } ?>
         </tbody>
