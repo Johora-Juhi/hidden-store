@@ -29,9 +29,31 @@ session_start();
 
         <div class="navbar navbar-expand-lg bg-info navbar-light">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/">Welcome Guest</a>
-            </li>
+            <?php
+
+            if (!isset($_SESSION['username'])) {
+              echo "
+        <li class='nav-item'>
+        <a class='nav-link' href='#'>Welcome Guest</a>
+      </li>
+      <li class='nav-item'>
+        <a class='nav-link' href='./admin_login.php'>Login</a>
+
+      </li>
+        ";
+            } else {
+              echo "
+        <li class='nav-item'>
+        <a class='nav-link' href='#'>Welcome " . $_SESSION['username'] . "</a>
+      </li>
+      <li class='nav-item'>
+        <a class='nav-link' href='./logout.php'>Logout</a>
+
+      </li>
+        ";
+            }
+            ?>
+
           </ul>
         </div>
       </div>

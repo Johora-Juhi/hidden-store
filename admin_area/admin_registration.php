@@ -1,3 +1,9 @@
+<!-- database connection -->
+<?php
+include_once('../includes/connect.php');
+include_once('../functions/common_functions.php');
+@session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -52,6 +58,35 @@
         </div>
     </div>
 
+    <?php
+    if (isset($_POST['user_register'])) {
+        $name = $_POST['name'];
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        $hash_password = password_hash($password, PASSWORD_DEFAULT);
+        $confirm_password = $_POST['confirm_password'];
+
+        // sellect query 
+        $select_query = "SELECT * FROM `admin_table` WHERE admin_name='$name' or admin_email='$email'";
+        $result_admin = mysqli_query($con, $select_query);
+        $number = mysqli_num_rows($result_admin);
+        if ($number > 0) {
+            echo "<script>alert('Admin name and email already exist')</script>";
+        } else if ($password !== $confirm_password) {
+            echo "<script>alert('Password does not match')</script>";
+        } else {
+            // insert quert 
+            $insert_query = "INSERT INTO `admin_table` (admin_name,admin_email,admin_password) VALUES ('$name','$email','$hash_password')";
+            $result = mysqli_query($con, $insert_query);
+            if ($result) {
+                $_SESSION['username'] = $name;
+                echo "<script>alert('Admin registered successfully')</script>";
+                echo "<script>window.open('./index.php','_self')</script>";
+            }
+        }
+
+    }
+    ?>
     <!-- bootsrap js link  -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 </body>

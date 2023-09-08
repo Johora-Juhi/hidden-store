@@ -1,3 +1,10 @@
+<!-- database connection -->
+<?php
+include_once('../includes/connect.php');
+include_once('../functions/common_functions.php');
+@session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,6 +49,30 @@
         </div>
     </div>
 
+    <?php
+    if (isset($_POST['user_login'])) {
+        $username = $_POST['name'];
+        $password = $_POST['password'];
+
+        // check if the user is regidtered 
+        $select_user = "SELECT * FROM `admin_table` WHERE admin_name='$username'";
+        $result_user = mysqli_query($con, $select_user);
+        $user_data = mysqli_fetch_assoc($result_user);
+        $user_count = mysqli_num_rows($result_user);
+
+        if ($user_count > 0) {
+            if (password_verify($password, $user_data['admin_password'])) {
+                $_SESSION['username'] = $username;
+                echo "<script>alert('Login successful')</script>";
+                echo "<script>window.open('./index.php','_self')</script>";
+            } else {
+                echo "<script>alert('Incorrect password')</script>";
+            }
+        } else {
+            echo "<script>alert('User is not registered')</script>";
+        }
+    }
+    ?>
     <!-- bootsrap js link  -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 </body>
