@@ -1,20 +1,23 @@
-<h3 class="text-success">All My Orders</h3>
-<table class="table table-bordered">
-    <thead class="bg-info">
-        <tr>
-            <th>Sl No</th>
-            <th>Total Products</th>
-            <th>Amount Due</th>
-            <th>Invoice Number</th>
-            <th>Date</th>
-            <th>Complete/Incomplete</th>
-            <th>Status</th>
-        </tr>
-    </thead>
-    <tbody class='bg-secondary text-light'>
+
         <?php
         $select_orders = "SELECT * FROM `user_orders` where user_id = $user_id";
         $result_orders = mysqli_query($con, $select_orders);
+        $orders_count = mysqli_num_rows($result_orders);
+        if($orders_count>0){
+            echo "<h3 class='text-success'>All My Orders</h3>
+            <table class='table table-bordered'>
+                <thead class='bg-info'>
+                    <tr>
+                        <th>Sl No</th>
+                        <th>Total Products</th>
+                        <th>Amount Due</th>
+                        <th>Invoice Number</th>
+                        <th>Date</th>
+                        <th>Complete/Incomplete</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody class='bg-secondary text-light'>";
         $number = 1;
         // $orders = mysqli_fetch_assoc($result_orders);
         while ($orders = mysqli_fetch_assoc($result_orders)) {
@@ -49,6 +52,10 @@
 
             $number++;
         }
+    echo "</tbody>
+</table>";
+}
+else{
+    echo "<h3 class='text-center text-danger my-5'>No order placed yet</h3>";
+}
         ?>
-    </tbody>
-</table>
